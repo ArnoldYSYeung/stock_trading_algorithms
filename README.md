@@ -7,6 +7,7 @@ The goal of this project is to create applications for managing stock portfolios
 
 Currently, this project includes:
   - assessment of portfolio performance statistics
+  - optimization of portfolio stock distribution based on indicated performance statistic
 
 The project is currently INCOMPLETE and ON-GOING.
 
