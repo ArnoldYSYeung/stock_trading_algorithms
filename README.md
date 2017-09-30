@@ -6,8 +6,9 @@ Developed and written by Arnold Yeung
 The goal of this project is to create applications for managing stock portfolios.  This may include assessing performance and algorithmic trading to optimize gain.
 
 Currently, this project includes:
-  - assessment of portfolio performance statistics
+  - assessment of statistical portfolio performances
   - optimization of portfolio stock distribution based on indicated performance statistic
+  - simulation of buying/selling commands in an active market and calculation of daily portfolio value
 
 The project is currently INCOMPLETE and ON-GOING.
 
