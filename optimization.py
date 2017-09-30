@@ -5,6 +5,8 @@
 ##  the portfolio.
 ##
 ##  2017-09-19: prop = 'adr' option does not seem to be optimizing - reason unknown
+##  2017-09-30: remove prop = 'adr' option because output should correspond with
+##              prop = 'cr' theoretically
 
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -57,11 +59,11 @@ def find_optim_allocs(price_df, init_allocs, rfr, sf, start_val, prop):
         print('Optimizing for Cumulative Return...');
         opts = spo.minimize(min_cr, init_allocs, args = (price_df,start_val),
                             method = 'SLSQP', bounds = bnds, constraints = cnst);
-    elif prop == 'adr':
-        #   Testing shows that adr is not optimizing but staying at init_allocs
-        print('Optimizing for Average Daily Return...');
-        opts = spo.minimize(min_adr, init_allocs, args = (price_df,start_val),
-                            method = 'SLSQP', bounds = bnds, constraints = cnst);
+##    elif prop == 'adr':
+##        #   Testing shows that adr is not optimizing but staying at init_allocs
+##        print('Optimizing for Average Daily Return...');
+##        opts = spo.minimize(min_adr, init_allocs, args = (price_df,start_val),
+##                            method = 'SLSQP', bounds = bnds, constraints = cnst);
     elif prop == 'vol':
         print('Optimizing for Volatility...');
         opts = spo.minimize(min_vol, init_allocs, args = (price_df,start_val),
@@ -91,6 +93,7 @@ def min_cr(allocs, prices, start_val):
     return -1*cr;
 
 def min_adr(allocs, prices, start_val):
+    #   no longer in use
     portfolio, total_vals = ass.create_portfolio(prices, allocs, start_val); #   create portfolio
     dr, dr_mean, dr_std = ass.get_daily_returns(total_vals);   #   get daily return
     return -1*dr_mean;

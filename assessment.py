@@ -3,6 +3,8 @@
 ##  This script and these functions assess the value of a portfolio by outputting
 ##  key portfolio statistics: cumulative return, avg daily return, Sharpe ratio,
 ##  volatility (as standard deviation)
+##
+##  2017-09-30: add in ref='SPY' parameter for create_price_df 
 
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -35,9 +37,14 @@ def assess_portfolio(sd, ed, syms, allocs, sv, rfr, sf, gen_plot):
     #   cumulative return, average daily return,
     #   standard deviation of daily return, Sharpe Ratio
 
-def create_price_df(syms, dates):
+def create_price_df(syms, dates, ref = 'SPY'):
 #   returns dataframe containing data found in location str (.csv)
+#   uses SPY as reference as default (ref)
     df = pd.DataFrame(index=dates);     #   create empty dataframe with dates as index
+
+    if ref not in syms:
+        orig_syms = syms            # does not contain ref if not already in syms
+        syms = [ref] + syms        #   add reference into symbols (used for determining trading days)
 
     for symbol in syms:      #   for each symbol
         #   create temp df for each syms
@@ -48,9 +55,15 @@ def create_price_df(syms, dates):
 
         df = df.join(df_syms);     # concatenate df_syms to main df
 
+        if symbol == ref:
+            df = df.dropna(subset=[ref])      # remove dates where SPY did not trade
+
     df.fillna(method='ffill', inplace = True);    # fill missing data based on last previous value (if available)
     df.fillna(method='bfill', inplace = True);     # fill remaining missing data based on first future value
-    
+
+    if ref not in orig_syms:
+        df = df.drop(ref,1)        #   remove ref column from df
+
     return df
 
 def norm_df(df, index):
