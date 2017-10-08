@@ -46,6 +46,9 @@ def learn_rt(returns_file, leaf_size = 1, verbose = False):
     #   predict with test set
     return_predict = clf.predict(X).reshape((n_samples,1))
     score = clf.score(X, y)     #   coefficient of determination R^2 of prediction
+    #   NOTE!!!!!  Right now the training set is used as the test set.  This is
+    #   not good.  Training set should be different from test set.  To be added
+    #   in future version.
     print("Coefficient of Determination: ", score);
 
     prediction = pd.DataFrame(0, index = returns.index, columns = ['Return'])
