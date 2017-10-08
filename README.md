@@ -1,4 +1,4 @@
-# stock_trading_algorithms
+ (in# stock_trading_algorithms
 Assessing stock portfolio performances and making predictions
 
 Developed and written by Arnold Yeung
@@ -9,7 +9,7 @@ Currently, this project includes:
   - assessment of statistical portfolio performances
   - optimization of portfolio stock distribution based on indicated performance statistic
   - simulation of buying/selling commands in an active market and calculation of daily portfolio value
-  - prediction of index return based on external factors (e.g. other index returns) using Random Forest Regressor
+  - prediction of index return based on external factors (e.g. other index returns) using Random Forest Regressor (in progress)
 
 The project is currently INCOMPLETE and ON-GOING.
 
