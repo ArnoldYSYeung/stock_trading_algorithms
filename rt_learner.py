@@ -9,7 +9,8 @@
 ##  2017-10-07: Implement basis for RF algorithm.  Currently, training and testing
 ##              on same dataset.  Need to implement cross-validation or test set
 ##  2017-10-14: Separate training and testing samples.  Current R^2 is 0.68 - optimization
-#               may be necessary.
+##             may be necessary.  Add in plotting function.
+
 
 
 import pandas as pd
@@ -42,9 +43,6 @@ def learn_rt(returns_file, leaf_size = 1, train_pct = 60, verbose = False):
     X_test = returns.iloc[n_train:, :-1]
     y_test = returns.iloc[n_train:, -1]
 
-
-    
-
     print("Training Random Forest Regressor model...")
     clf = RandomForestRegressor(n_estimators = 300, max_features = n_features, \
                                 n_jobs = -1, oob_score = True)
@@ -66,9 +64,21 @@ def learn_rt(returns_file, leaf_size = 1, train_pct = 60, verbose = False):
     
     print("Coefficient of Determination: ", score);
 
-    prediction = pd.DataFrame(0, index = X_test.index, columns = ['Return'])
-    prediction = prediction + return_predict
+    prediction = pd.DataFrame(0, index = X_test.index, \
+                              columns = ['Actual', 'Predicted'])
+
+    prediction[['Actual','Predicted']] = [y_test.values.reshape(n_test, 1), \
+                                          return_predict]
     print(prediction)
+
+    #   plot Predicted v. Actual
+    plt.scatter(prediction['Predicted'], prediction['Actual'])
+    plt.title("Random Forest Regressor")
+    plt.xlabel("Actual Return")
+    plt.ylabel("Predicted Return")
+    
+    plt.show()
+    
     
 if __name__ == '__main__':
 
