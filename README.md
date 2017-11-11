@@ -1,7 +1,7 @@
  # stock_trading_algorithms
 Assessing stock portfolio performances and making predictions
 
-Developed and written by Arnold Yeung
+Developed and written by Arnold Yeung unless stated otherwise.
 
 The goal of this project is to create applications for managing stock portfolios.  This may include assessing performance and algorithmic trading to optimize gain.
 
@@ -10,7 +10,7 @@ Currently, this project includes:
   - optimization of portfolio stock distribution based on indicated performance statistic
   - simulation of buying/selling commands in an active market and calculation of daily portfolio value
   - prediction of index return based on external factors (e.g. other index returns) using Random Forest Regressor
-  - a Q-Learner API (to be used in later applications)
+  - a Q-Learner with Dyna API (to be used in later applications)
   
 The project is currently INCOMPLETE and ON-GOING.
 
