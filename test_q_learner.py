@@ -96,7 +96,7 @@ if __name__=="__main__":
     verbose = False #print lots of debug stuff if True
 
     # read in the map
-    inf = open('testworlds/world01.csv')
+    inf = open('testworlds/world10.csv')
     data = np.array([list(map(float,s.strip().split(','))) for s in inf.readlines()])
     originalmap = data.copy() #make a copy so we can revert to the original map later
 
@@ -112,10 +112,11 @@ if __name__=="__main__":
         rar = 0.98, \
         radr = 0.9999, \
         verbose=verbose, \
-        dyna=0) #initialize the learner
+        dyna=200) #initialize the learner
 
+    step_lst = [];      #   list containing number of steps per iteration
     #each iteration involves one trip to the goal
-    for iteration in range(0,1000): 
+    for iteration in range(0,50): 
         steps = 0
         data = originalmap.copy()
         robopos = startpos
@@ -138,6 +139,8 @@ if __name__=="__main__":
             if verbose: printmap(data)
             if verbose: time.sleep(1)
             steps += 1
+
+            step_lst.append(steps)
 
         print(iteration, "," , steps)
 printmap(data)
