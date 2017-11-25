@@ -4,6 +4,8 @@
 ##  key portfolio statistics: cumulative return, avg daily return, Sharpe ratio,
 ##  volatility (as standard deviation)
 ##
+##  2017-11-25: fixed bug in create_price_df() where orig_syms is undefined because ref is in
+##              syms
 ##  2017-09-30: add in ref='SPY' parameter for create_price_df 
 
 import pandas as pd
@@ -42,8 +44,9 @@ def create_price_df(syms, dates, ref = 'SPY'):
 #   uses SPY as reference as default (ref)
     df = pd.DataFrame(index=dates);     #   create empty dataframe with dates as index
 
+    orig_syms = syms            # does not contain ref if not already in syms
+
     if ref not in syms:
-        orig_syms = syms            # does not contain ref if not already in syms
         syms = [ref] + syms        #   add reference into symbols (used for determining trading days)
 
     for symbol in syms:      #   for each symbol
