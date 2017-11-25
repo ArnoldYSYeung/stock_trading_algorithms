@@ -6,6 +6,7 @@
 ##
 ##  2017-11-25: fixed bug in create_price_df() where orig_syms is undefined because ref is in
 ##              syms
+##              add in ref_opt parameter for create_price_df() so can use without reference
 ##  2017-09-30: add in ref='SPY' parameter for create_price_df 
 
 import pandas as pd
@@ -39,14 +40,14 @@ def assess_portfolio(sd, ed, syms, allocs, sv, rfr, sf, gen_plot):
     #   cumulative return, average daily return,
     #   standard deviation of daily return, Sharpe Ratio
 
-def create_price_df(syms, dates, ref = 'SPY'):
+def create_price_df(syms, dates, ref_opt = True, ref = 'SPY'):
 #   returns dataframe containing data found in location str (.csv)
 #   uses SPY as reference as default (ref)
     df = pd.DataFrame(index=dates);     #   create empty dataframe with dates as index
 
     orig_syms = syms            # does not contain ref if not already in syms
 
-    if ref not in syms:
+    if ref not in syms and ref_opt == True:
         syms = [ref] + syms        #   add reference into symbols (used for determining trading days)
 
     for symbol in syms:      #   for each symbol
@@ -58,13 +59,13 @@ def create_price_df(syms, dates, ref = 'SPY'):
 
         df = df.join(df_syms);     # concatenate df_syms to main df
 
-        if symbol == ref:
+        if symbol == ref and ref_opt == True:
             df = df.dropna(subset=[ref])      # remove dates where SPY did not trade
 
     df.fillna(method='ffill', inplace = True);    # fill missing data based on last previous value (if available)
     df.fillna(method='bfill', inplace = True);     # fill remaining missing data based on first future value
 
-    if ref not in orig_syms:
+    if ref not in orig_syms and ref_opt == True:
         df = df.drop(ref,1)        #   remove ref column from df
 
     return df
