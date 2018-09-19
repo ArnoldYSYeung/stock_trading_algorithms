@@ -11,8 +11,6 @@ Currently, this project includes:
   - simulation of buying/selling commands in an active market and calculation of daily portfolio value
   - prediction of index return based on external factors (e.g. other index returns) using Random Forest Regressor
   - a Q-Learner with Dyna API (to be used in later applications)
-  
-The project is currently INCOMPLETE and ON-GOING.
 
 For more information, please visit www.arnoldyeung.com
 
