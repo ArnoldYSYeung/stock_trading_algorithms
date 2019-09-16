@@ -10,8 +10,8 @@ Currently, this project includes:
   - optimization of portfolio stock distribution based on indicated performance statistic
   - simulation of buying/selling commands in an active market and calculation of daily portfolio value
   - prediction of index return based on external factors (e.g. other index returns) using Random Forest Regressor
-  - a Q-Learner with Dyna API (to be used in later applications)
-
+  - a discrete Q-Learner with Dyna API
+  
 For more information, please visit www.arnoldyeung.com
 
 If you have any questions or comments, feel free to contact me at contact@arnoldyeung.com
